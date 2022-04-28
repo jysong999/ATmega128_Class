@@ -1,8 +1,7 @@
-//ÀüÀÚ°øÇÐºÎ 201918147 ¼ÛÀç¿µ
 
-// ³»ºÎ interrupt¿Í ¿ÜºÎ interrupt¸¦ ÀÌ¿ëÇÑ LED Á¦¾î
+// ë‚´ë¶€ interruptì™€ ì™¸ë¶€ interruptë¥¼ ì´ìš©í•œ LED ì œì–´
 
-//ÇÃ¶ó½ºÆ½ ¹Ú½º Àåºñ »ç¿ë
+//í”Œë¼ìŠ¤í‹± ë°•ìŠ¤ ìž¥ë¹„ ì‚¬ìš©
 
 
 
@@ -36,13 +35,13 @@ interrupt [EXT_INT0] void ext_int0_isr(void)
 
 
 interrupt [TIM0_OVF] void timer0_overflow(void) {
-// 10msec ¸¶´Ù Interrupt ¹ß»ý 
-TCNT0 = -156; //10msec ÀÎÅÍ·´Æ® ½Ã°£ Á¶Àý count
-TIMER_COUNT++; //Interrupt ¹ß»ý Count 
+// 10msec ë§ˆë‹¤ Interrupt ë°œìƒ 
+TCNT0 = -156; //10msec ì¸í„°ëŸ½íŠ¸ ì‹œê°„ ì¡°ì ˆ count
+TIMER_COUNT++; //Interrupt ë°œìƒ Count 
 
-    if (TIMER_COUNT>=50){  //500msec º¸´Ù Å©¸é 
-        TIMER_COUNT = 0;   //Interruput Count ÃÊ±âÈ­
-        INT_FLAG = 1;      //500msec ÀÎÅÍ·´Æ® ¹ß»ý ÇÃ·¡Å© 
+    if (TIMER_COUNT>=50){  //500msec ë³´ë‹¤ í¬ë©´ 
+        TIMER_COUNT = 0;   //Interruput Count ì´ˆê¸°í™”
+        INT_FLAG = 1;      //500msec ì¸í„°ëŸ½íŠ¸ ë°œìƒ í”Œëž˜í¬ 
     }
 
 }
@@ -58,23 +57,23 @@ void main(void){
 
     
     TCCR0 = 0x07; //Clock Division /1025
-    TCNT0 = 99; //10msec ÀÎÅÍ·´Æ® ½Ã°£ Á¶Àý count
+    TCNT0 = 99; //10msec ì¸í„°ëŸ½íŠ¸ ì‹œê°„ ì¡°ì ˆ count
     TIMSK = 0x01; //Timer0_overflow Interrupt Enable
 
 
 
-    DDRD = 0x00; //PORTD(KEY)¸¦ ÀÔ·ÂÀ¸·Î ¼³Á¤
+    DDRD = 0x00; //PORTD(KEY)ë¥¼ ìž…ë ¥ìœ¼ë¡œ ì„¤ì •
     sw = (PIND&0b00000001);
 
-    DDRE = 0xff; //PORTE(LED)¸¦ Ãâ·ÂÀ¸·Î ¼³Á¤ 
-    PORTE = 0xff; //PORTE ÃÊ±â ·¹º§À» 1·Î    
+    DDRE = 0xff; //PORTE(LED)ë¥¼ ì¶œë ¥ìœ¼ë¡œ ì„¤ì • 
+    PORTE = 0xff; //PORTE ì´ˆê¸° ë ˆë²¨ì„ 1ë¡œ    
     
     
-    EIMSK = 0b0000001;  //int0¸¸ ÀÎÅÍ·´Æ®¸¦ Çã¿ë
+    EIMSK = 0b0000001;  //int0ë§Œ ì¸í„°ëŸ½íŠ¸ë¥¼ í—ˆìš©
     
-    EICRA = 0b00000010;    //INT0¸¦ ÇÏ°­¸ð¼­¸®¿¡¼­ ÀÎÅÍ·´Æ® ¿äÃ»
+    EICRA = 0b00000010;    //INT0ë¥¼ í•˜ê°•ëª¨ì„œë¦¬ì—ì„œ ì¸í„°ëŸ½íŠ¸ ìš”ì²­
     
-    SREG = 0b10000000; //global ÀÎÅÍ·´Æ® enable bit 
+    SREG = 0b10000000; //global ì¸í„°ëŸ½íŠ¸ enable bit 
 
     while(1){
     
@@ -96,13 +95,13 @@ void main(void){
             else{
                   
             
-                      MAIN_COUNT++;     //COUNT 1¾¿ Áõ°¡ 
-                //4¹øÂ° ºñÆ®ºÎÅÍ 7¹øÂ° ºñÆ®±îÁö Áõ°¡ ½ÃÄÑ¾ß ÇÏ¹Ç·Î MAIN_COUNT¿¡ +3À» Áõ°¡ ½ÃÅ² ÈÄ  ¿À¸¥ÂÊÀ¸·Î 1¾¿ shift
-                 if(INT_FLAG){  //10msec ÀÎÅÍ·´Æ®°¡ 50¹ø °É¸®¸é, (Áï 500msec¸¶´Ù INT_FLAG°¡ ¹ß»ý)
-                                 INT_FLAG = 0;  //Interrupt Flag¸¦ Clear
-                                 COUNT++;       //LED Count Áõ°¡ 
+                      MAIN_COUNT++;     //COUNT 1ì”© ì¦ê°€ 
+                //4ë²ˆì§¸ ë¹„íŠ¸ë¶€í„° 7ë²ˆì§¸ ë¹„íŠ¸ê¹Œì§€ ì¦ê°€ ì‹œì¼œì•¼ í•˜ë¯€ë¡œ MAIN_COUNTì— +3ì„ ì¦ê°€ ì‹œí‚¨ í›„  ì˜¤ë¥¸ìª½ìœ¼ë¡œ 1ì”© shift
+                 if(INT_FLAG){  //10msec ì¸í„°ëŸ½íŠ¸ê°€ 50ë²ˆ ê±¸ë¦¬ë©´, (ì¦‰ 500msecë§ˆë‹¤ INT_FLAGê°€ ë°œìƒ)
+                                 INT_FLAG = 0;  //Interrupt Flagë¥¼ Clear
+                                 COUNT++;       //LED Count ì¦ê°€ 
                                  PORTE = 1<<(COUNT+3); 
-                //shift µÈ °ªÀÌ 7À» ÃÊ°ú ÇÏÁö ¸»¾Æ¾ß ÇÏ¹Ç·Î '0'À¸·Î ÃÊ±âÈ­ ÇÑ´Ù.
+                //shift ëœ ê°’ì´ 7ì„ ì´ˆê³¼ í•˜ì§€ ë§ì•„ì•¼ í•˜ë¯€ë¡œ '0'ìœ¼ë¡œ ì´ˆê¸°í™” í•œë‹¤.
                                 if (COUNT>=4) COUNT = 0;
                                 }
             
