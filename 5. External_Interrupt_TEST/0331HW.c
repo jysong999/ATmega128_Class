@@ -1,5 +1,4 @@
-// ÀüÀÚ°øÇĞºÎ 201918147 ¼ÛÀç¿µ
-// Ã¶Á¦¹Ú½º Àåºñ
+// ì² ì œë°•ìŠ¤ ì¥ë¹„
 
 
 
@@ -29,10 +28,10 @@ interrupt [EXT_INT0] void ext_int0_isr (void)
 void main(void)
 {
     
-    DDRE = 0xff;  //PORTEÀÇ ¹æÇâÀ» Ãâ·ÂÀ¸·Î ÇÔ.
-    PORTE = 0xff; //PORTE ÃÊ±â ·¹º§À» '1' »óÅÂ·Î ¸¸µë.   
+    DDRE = 0xff;  //PORTEì˜ ë°©í–¥ì„ ì¶œë ¥ìœ¼ë¡œ í•¨.
+    PORTE = 0xff; //PORTE ì´ˆê¸° ë ˆë²¨ì„ '1' ìƒíƒœë¡œ ë§Œë“¬.   
     
-    EIMSK = 0x01;     //external inturrupt int0 enable »óÅÂ·Î
+    EIMSK = 0x01;     //external inturrupt int0 enable ìƒíƒœë¡œ
     EICRA = 0x02;    // falling edge
     
     SREG = 0x80;  //Global Interrupt Enable
@@ -43,7 +42,7 @@ while (1)
     {
         if(Left_Shift < 3)
         {
-             COUNT++;       //LED Count Áõ°¡
+             COUNT++;       //LED Count ì¦ê°€
              PORTE = ~(1<<(COUNT+3));
              delay_ms(500);
              if (COUNT>=4) COUNT = 0;
