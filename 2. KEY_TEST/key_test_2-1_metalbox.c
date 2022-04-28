@@ -1,10 +1,8 @@
 
-//ÀüÀÚ°øÇÐºÎ 201918147 ¼ÛÀç¿µ
+//Futher Example 2-1    : ì² ì œ ë°•ìŠ¤ ìž¥ë¹„ ì‚¬ìš©
 
-//Futher Example 2-1    : Ã¶Á¦ ¹Ú½º Àåºñ »ç¿ë
-
-//key¸¦ ´©¸£¸é ¿¬°áµÈ LED¸¦ Á¦¿ÜÇÑ ³ª¸ÓÁö LED°¡ ÄÑÁöµµ·Ï ÇÑ´Ù. 
-//Key¸¦ ´©¸£Áö ¾ÊÀº Á¶°Ç¿¡¼­´Â ÀüºÎ ²¨Áø »óÅÂ¸¦ À¯Áö
+//keyë¥¼ ëˆ„ë¥´ë©´ ì—°ê²°ëœ LEDë¥¼ ì œì™¸í•œ ë‚˜ë¨¸ì§€ LEDê°€ ì¼œì§€ë„ë¡ í•œë‹¤. 
+//Keyë¥¼ ëˆ„ë¥´ì§€ ì•Šì€ ì¡°ê±´ì—ì„œëŠ” ì „ë¶€ êº¼ì§„ ìƒíƒœë¥¼ ìœ ì§€
 
 #include<mega128.h>
 
@@ -15,19 +13,19 @@ BYTE S_PORTD, S_PORTE;
 
 void main(void)
 {
-    //PORTÃÊ±âÈ­
-    DDRD = 0x00;            //Key : PORTD : ÀÔ·Â = 0
-    PORTD = 0xf0;           //»óÀ§ 4ºñÆ®¸¸ »ç¿ë
-    DDRE = 0xff;            //LED : PORTE : Ãâ·Â = 1
-    PORTE = 0xf0;           //KEY¸¦ ´©¸£Áö ¾Ê¾ÒÀ» ¶§ LED ¸ðµÎ ²¨Áø »óÅÂ, LED´Â 0ÀÏ ¶§ Á¡µî
+    //PORTì´ˆê¸°í™”
+    DDRD = 0x00;            //Key : PORTD : ìž…ë ¥ = 0
+    PORTD = 0xf0;           //ìƒìœ„ 4ë¹„íŠ¸ë§Œ ì‚¬ìš©
+    DDRE = 0xff;            //LED : PORTE : ì¶œë ¥ = 1
+    PORTE = 0xf0;           //KEYë¥¼ ëˆ„ë¥´ì§€ ì•Šì•˜ì„ ë•Œ LED ëª¨ë‘ êº¼ì§„ ìƒíƒœ, LEDëŠ” 0ì¼ ë•Œ ì ë“±
     
     while(1){
     
-        S_PORTD = (PIND&0xf0);   // ÀÓ½Ã ¹öÆÛ »ý¼º, »óÀ§ 4ºñÆ®¸¦ ÀÐ¾î¼­ ÀúÀå
-        S_PORTE = (PORTE&0xf0);  // ÀÓ½Ã ¹öÆÛ »ý¼º, µ¿ÀÛ¿¡ »ó°ü ¾ø´Â ÇÏÀ§ 4ºñÆ®´Â MASKÃ³¸® 
+        S_PORTD = (PIND&0xf0);   // ìž„ì‹œ ë²„í¼ ìƒì„±, ìƒìœ„ 4ë¹„íŠ¸ë¥¼ ì½ì–´ì„œ ì €ìž¥
+        S_PORTE = (PORTE&0xf0);  // ìž„ì‹œ ë²„í¼ ìƒì„±, ë™ìž‘ì— ìƒê´€ ì—†ëŠ” í•˜ìœ„ 4ë¹„íŠ¸ëŠ” MASKì²˜ë¦¬ 
         
         if(S_PORTD != S_PORTE){
-            //Ã¶Á¦ ¹Ú½º : Å°°¡ ´­·ÈÀ» ¶§ 0, LED 0ÀÏ ¶§ Á¡µî
+            //ì² ì œ ë°•ìŠ¤ : í‚¤ê°€ ëˆŒë ¸ì„ ë•Œ 0, LED 0ì¼ ë•Œ ì ë“±
             if(S_PORTD == ~0x10) PORTE = ~0xE0;   //K : (0001 0000)'  L : (1110 0000)' 
             if(S_PORTD == ~0x20) PORTE = ~0xD0;   //K : (0010 0000)'  L : (1101 0000)'
             if(S_PORTD == ~0x40) PORTE = ~0xB0;   //K : (0100 0000)'  L : (1011 0000)'
