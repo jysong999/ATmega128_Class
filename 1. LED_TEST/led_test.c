@@ -1,13 +1,11 @@
-
-//ÀüÀÚ°øÇĞºÎ 201918147 ¼ÛÀç¿µ
-//LED 0000 0011 1100 1111 ¹İº¹ Á¡¸ê ÄÚµå
-//ÇÃ¶ó½ºÆ½ ¹Ú½º Àåºñ ATmega128 »ç¿ë  
+//LED 0000 0011 1100 1111 ë°˜ë³µ ì ë©¸ ì½”ë“œ
+//í”Œë¼ìŠ¤í‹± ë°•ìŠ¤ ì¥ë¹„ ATmega128 ì‚¬ìš©  
 
 #include <mega128.h>
 #include <delay.h>
 
 
-//¿¹Á¦ ÄÚµå º¯Çü 
+//ì˜ˆì œ ì½”ë“œ ë³€í˜• 
 //typedef  unsigned char  BYTE;
 //typedef  unsigned int   WORD;
 //BYTE MAIN_COUNT = 0; 
@@ -15,7 +13,7 @@
 void main(void)
 {
 
-    DDRE = 0xff; //PORTEÀÇ ¹æÇâÀ» Ãâ·ÂÀ¸·Î ÇÔ.    
+    DDRE = 0xff; //PORTEì˜ ë°©í–¥ì„ ì¶œë ¥ìœ¼ë¡œ í•¨.    
         
     while(1)
     {
