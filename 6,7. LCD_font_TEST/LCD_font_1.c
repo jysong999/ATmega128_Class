@@ -1,5 +1,5 @@
-//201918147 ¼ÛÀç¿µ
-//(1) I  (heart ¸ğ¾ç) JBNU ¸¦ LCDÀÇ Ã¹¹øÂ° line¿¡ display   ( heart ¸ğ¾çÀº font Á¦ÀÛÇÏ¿© »ç¿ë)
+
+//(1) I  (heart ëª¨ì–‘) JBNU ë¥¼ LCDì˜ ì²«ë²ˆì§¸ lineì— display   ( heart ëª¨ì–‘ì€ font ì œì‘í•˜ì—¬ ì‚¬ìš©)
  
 #include <mega128.h>
 #include <delay.h>
@@ -32,7 +32,7 @@ typedef  unsigned char  BYTE;
 
 //BYTE LCD_BUF[20];
 
-//»ç¿ëÀÚ ÆùÆ® Á¤ÀÇ
+//ì‚¬ìš©ì í°íŠ¸ ì •ì˜
 
 
 BYTE flash FONT6[8]={
@@ -133,8 +133,8 @@ void CLCD_String(flash unsigned char *str)
 {
  while(*str)   // CHECK EOC(0)
  {  
-  Write_Data(*str);  // LCD DISPLAY, *str : strÀÌ ÀúÀåµÈ address
-  str++;              // strÀÇ address Áõ°¡ 
+  Write_Data(*str);  // LCD DISPLAY, *str : strì´ ì €ì¥ëœ address
+  str++;              // strì˜ address ì¦ê°€ 
   delay_ms(200);  
  }
 }       
