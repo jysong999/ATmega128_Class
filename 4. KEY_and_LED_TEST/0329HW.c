@@ -1,5 +1,4 @@
-// ÀüÀÚ°øÇÐºÎ 201918147 ¼ÛÀç¿µ
-// Ã¶Á¦¹Ú½º Àåºñ
+// ì² ì œë°•ìŠ¤ ìž¥ë¹„
 
 
 
@@ -23,15 +22,15 @@ BYTE LED_DIR = 0;                       //LED Parameter Variable
 
 
 interrupt [TIM0_OVF] void timer0_overflow(void) {
-// 10msec ¸¶´Ù Interrupt ¹ß»ý 
-TCNT0 = 99;     //10msec ÀÎÅÍ·´Æ® ½Ã°£ Á¶Àý count
-TIMER_COUNT++;  //Interrupt ¹ß»ý Count 
+// 10msec ë§ˆë‹¤ Interrupt ë°œìƒ 
+TCNT0 = 99;     //10msec ì¸í„°ëŸ½íŠ¸ ì‹œê°„ ì¡°ì ˆ count
+TIMER_COUNT++;  //Interrupt ë°œìƒ Count 
 
-    if (LED_SET_TIME == 0 ) LED_SET_TIME = 1; // LED TIMER°¡ 1º¸´Ù ÀÛÀ»¸é 0xffÀÌ´Ù 
+    if (LED_SET_TIME == 0 ) LED_SET_TIME = 1; // LED TIMERê°€ 1ë³´ë‹¤ ìž‘ì„ë©´ 0xffì´ë‹¤ 
     
-    if (LED_SET_TIME == TIMER_COUNT){        //LED_SET_TIME º¸´Ù Å©¸é 
-        TIMER_COUNT = 0;                     //Interruput Count ÃÊ±âÈ­
-        INT_FLAG = 1;                        //LED ON ÀÎÅÍ·´Æ® ¹ß»ý ÇÃ·¡Å© 
+    if (LED_SET_TIME == TIMER_COUNT){        //LED_SET_TIME ë³´ë‹¤ í¬ë©´ 
+        TIMER_COUNT = 0;                     //Interruput Count ì´ˆê¸°í™”
+        INT_FLAG = 1;                        //LED ON ì¸í„°ëŸ½íŠ¸ ë°œìƒ í”Œëž˜í¬ 
     }
 } 
 /****************************************
@@ -43,19 +42,19 @@ BYTE key_check(){
  
 char key_flag = 0;
 
-    KEY_CURRENT = (PIND&0xf0);                  //PINDÀÇ ÇÏÀ§ 4bit »ç¿ëÇÏÁö ¾Ê±â À§ÇÑ mask 
+    KEY_CURRENT = (PIND&0xf0);                  //PINDì˜ í•˜ìœ„ 4bit ì‚¬ìš©í•˜ì§€ ì•Šê¸° ìœ„í•œ mask 
     
-    if (KEY_CURRENT != 0xf0) key_flag = 1;      //¸¸¾à Key°¡ ´­¸®¸é 
+    if (KEY_CURRENT != 0xf0) key_flag = 1;      //ë§Œì•½ Keyê°€ ëˆŒë¦¬ë©´ 
     
-    if ((key_flag)&&(KEY_CURRENT != KEY_OLD)){  //¸¸¾à Å°°¡ ´­¸®°í, Å° °ªÀÌ ¹Ù²åÀ¸¸é 
-        KEY_OLD = KEY_CURRENT;                  //ÀÌÀü Å° °ª¿¡ ÇöÀç Å°°ª ÀúÀå 
-         return (1);                            // Å° °ªÀÌ º¯°æ µÇ¾úÀ½ 
+    if ((key_flag)&&(KEY_CURRENT != KEY_OLD)){  //ë§Œì•½ í‚¤ê°€ ëˆŒë¦¬ê³ , í‚¤ ê°’ì´ ë°”ê¿¨ìœ¼ë©´ 
+        KEY_OLD = KEY_CURRENT;                  //ì´ì „ í‚¤ ê°’ì— í˜„ìž¬ í‚¤ê°’ ì €ìž¥ 
+         return (1);                            // í‚¤ ê°’ì´ ë³€ê²½ ë˜ì—ˆìŒ 
     }
-    else if (!key_flag){                        //Å°°¡ ´­¸®Áö ¾Ê¾ÒÀ¸¸é, 
-         KEY_OLD = 0;                           // Å° °ªÀÌ º¯°æµÇÁö ¾Ê¾ÒÀ½. 
+    else if (!key_flag){                        //í‚¤ê°€ ëˆŒë¦¬ì§€ ì•Šì•˜ìœ¼ë©´, 
+         KEY_OLD = 0;                           // í‚¤ ê°’ì´ ë³€ê²½ë˜ì§€ ì•Šì•˜ìŒ. 
          return (0);
     }    
-    else return (0);                            //Å°°¡ ´­¸®Áö ¾Ê¾ÒÀ½. 
+    else return (0);                            //í‚¤ê°€ ëˆŒë¦¬ì§€ ì•Šì•˜ìŒ. 
 
 } 
 /****************************************
@@ -64,10 +63,10 @@ Parameters : 0 - SHIFT RIGHT
              1 - SHIFT LEFT
 *****************************************/
 void led_shift(char dir){
-//4¹øÂ° ºñÆ®ºÎÅÍ 7¹øÂ° ºñÆ®±îÁö Áõ°¡ ½ÃÄÑ¾ß ÇÏ¹Ç·Î MAIN_COUNT¿¡ +3À» Áõ°¡ ½ÃÅ² ÈÄ  ¿À¸¥ÂÊÀ¸·Î 1¾¿ shift
+//4ë²ˆì§¸ ë¹„íŠ¸ë¶€í„° 7ë²ˆì§¸ ë¹„íŠ¸ê¹Œì§€ ì¦ê°€ ì‹œì¼œì•¼ í•˜ë¯€ë¡œ MAIN_COUNTì— +3ì„ ì¦ê°€ ì‹œí‚¨ í›„  ì˜¤ë¥¸ìª½ìœ¼ë¡œ 1ì”© shift
     if (!dir){
           //PORTE = ~(1<<(COUNT+3));
-                      switch (COUNT){            //COUNT °ª¿¡ µû¶ó¼­ LED Á¡µîÀÌ ´Þ¶óÁü
+                      switch (COUNT){            //COUNT ê°’ì— ë”°ë¼ì„œ LED ì ë“±ì´ ë‹¬ë¼ì§
                 case 0 : PORTE = 0x30;     
                             break;
                 case 1 : PORTE = 0x60;
@@ -85,7 +84,7 @@ void led_shift(char dir){
            
     }
     else {                   
-            switch (COUNT){                      //COUNT °ª¿¡ µû¶ó¼­ LED Á¡µîÀÌ ´Þ¶óÁü
+            switch (COUNT){                      //COUNT ê°’ì— ë”°ë¼ì„œ LED ì ë“±ì´ ë‹¬ë¼ì§
                 case 0 : PORTE = 0x30;     
                             break;
                 case 1 : PORTE = 0x90;
@@ -106,29 +105,29 @@ void led_shift(char dir){
 void main(void)
 {
     TCCR0 = 0x07;   //Clock Division /1024
-    TCNT0 = 99;     //10msec ÀÎÅÍ·´Æ® ½Ã°£ Á¶Àý count
+    TCNT0 = 99;     //10msec ì¸í„°ëŸ½íŠ¸ ì‹œê°„ ì¡°ì ˆ count
     TIMSK = 0x01;   //Timer0_overflow Interrupt Enable
     
-    DDRE = 0xff;    //PORTEÀÇ ¹æÇâÀ» Ãâ·ÂÀ¸·Î ÇÔ.
-    PORTE = 0xff;   //PORTE ÃÊ±â ·¹º§À» '1' »óÅÂ·Î ¸¸µë. 
+    DDRE = 0xff;    //PORTEì˜ ë°©í–¥ì„ ì¶œë ¥ìœ¼ë¡œ í•¨.
+    PORTE = 0xff;   //PORTE ì´ˆê¸° ë ˆë²¨ì„ '1' ìƒíƒœë¡œ ë§Œë“¬. 
     
-    DDRD = 0x00;    //PORTDÀÇ ¹æÇâÀ» ÀÔ·ÂÀ¸·Î ÇÔ.
-    PORTD = 0xff;   //PORTDÀÇ ÃÊ±â ·¹º§À» '1' »óÅÂ·Î ¸¸µë. 
+    DDRD = 0x00;    //PORTDì˜ ë°©í–¥ì„ ìž…ë ¥ìœ¼ë¡œ í•¨.
+    PORTD = 0xff;   //PORTDì˜ ì´ˆê¸° ë ˆë²¨ì„ '1' ìƒíƒœë¡œ ë§Œë“¬. 
 
     SREG = 0x80;    //Global Interrupt Enable
 
 while (1)
       {
-        MAIN_COUNT++;     //COUNT 1¾¿ Áõ°¡ 
-        if(INT_FLAG){  //¼³Á¤ ½Ã°£ º¸´Ù 
-            INT_FLAG = 0;  //Interrupt Flag¸¦ Clear
-            COUNT++;       //LED Count Áõ°¡ 
+        MAIN_COUNT++;     //COUNT 1ì”© ì¦ê°€ 
+        if(INT_FLAG){  //ì„¤ì • ì‹œê°„ ë³´ë‹¤ 
+            INT_FLAG = 0;  //Interrupt Flagë¥¼ Clear
+            COUNT++;       //LED Count ì¦ê°€ 
             led_shift(LED_DIR);
-            //shift µÈ °ªÀÌ 7À» ÃÊ°ú ÇÏÁö ¸»¾Æ¾ß ÇÏ¹Ç·Î '0'À¸·Î ÃÊ±âÈ­ ÇÑ´Ù.
+            //shift ëœ ê°’ì´ 7ì„ ì´ˆê³¼ í•˜ì§€ ë§ì•„ì•¼ í•˜ë¯€ë¡œ '0'ìœ¼ë¡œ ì´ˆê¸°í™” í•œë‹¤.
             if (COUNT>=4) COUNT = 0;
         } 
-        if (key_check()){                   // Å°°¡  ´­·È´Ù¸é, 
-            switch (PIND&0xf0){             // Å°°¡ ¾î¶» °ªÀÌ ´©·È´Â°¡? 
+        if (key_check()){                   // í‚¤ê°€  ëˆŒë ¸ë‹¤ë©´, 
+            switch (PIND&0xf0){             // í‚¤ê°€ ì–´ë–» ê°’ì´ ëˆ„ë ¸ëŠ”ê°€? 
                 case SW4 : LED_DIR = 1;     
                             break;
                 case SW5 : LED_DIR = 0;
